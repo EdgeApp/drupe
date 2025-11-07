@@ -5,4 +5,5 @@ export const drupe: Drupe = (selector) => (subject) => {
   return matchesSelector(subject, selector);
 };
 
-export type { MangoSelector } from "./types";
+export type * from "./types";
+export * from "./cleaners";

@@ -31,18 +31,20 @@
     "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
     "prepare": "bun run build",
     "release": "bun run prepare && bunx jsr publish && npm publish",
+    "test": "bun test",
     "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest",
     "bun-promptx": "0.2.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "prettier": "^3.6.2"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "pouchdb-selector-core": "^9.0.0",
-    "prettier": "^3.6.2"
+    "cleaners": "^0.3.17",
+    "pouchdb-selector-core": "^9.0.0"
   }
 }
