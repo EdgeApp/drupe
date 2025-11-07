@@ -1,3 +1,6 @@
+export type Drupe = (selector: MangoSelector) => DrupeQuery;
+export type DrupeQuery = (subject: unknown) => boolean;
+
 export type MangoPrimitive = null | boolean | number | string;
 
 export type MangoValue =

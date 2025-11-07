@@ -1,7 +1,7 @@
 import { matchesSelector } from 'pouchdb-selector-core'
-import type { MangoSelector } from './types'
+import type { Drupe } from './types'
 
-export const drupe = (selector: MangoSelector) => (subject: unknown): boolean => {
+export const drupe: Drupe = (selector)=> (subject)=> {
   return matchesSelector(subject, selector)
 }
 
