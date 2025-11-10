@@ -1,6 +1,9 @@
 {
   "name": "drupe",
   "version": "0.0.3",
+  "repository": "https://github.com/samholmes/drupe",
+  "author": "Sam Holmes <sam.lb.holmes@gmail.com>",
+  "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
   "main": "./dist/index.js",
