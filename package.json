@@ -1,8 +1,11 @@
 {
   "name": "@edge.app/drupe",
   "version": "0.0.6",
-  "repository": "https://github.com/samholmes/drupe",
-  "author": "Sam Holmes <sam.lb.holmes@gmail.com>",
+  "repository": "https://github.com/EdgeApp/drupe",
+  "author": "Edge (Airbitz Inc.)",
+  "contributors": [
+    "Sam Holmes <sam@edge.app>"
+  ],
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
