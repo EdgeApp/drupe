@@ -13,16 +13,11 @@
 
 ## Installation
 
-Install with your favourite package manager:
+Install from JSR:
 
 ```bash
-npm install drupe
-# or
-pnpm add drupe
-# or
-yarn add drupe
-# or
-bun add drupe
+# npm, bun, and older versions of yarn or pnpm
+npx jsr add @holmes/drupe
 ```
 
 ## Quick start
