@@ -16,8 +16,11 @@
 Install from JSR:
 
 ```bash
-# npm, bun, and older versions of yarn or pnpm
-npx jsr add @holmes/drupe
+# From NPM
+yarn add @edge.app/drup
+
+# From JSR
+npx jsr add @edgeapp/drupe
 ```
 
 ## Quick start
