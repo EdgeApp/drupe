@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.7
+
+- changed: Changed the `package.json` file to reflect Edge's ownership.
+
 ## 0.0.6
 
 - fixed: Update installation instructions with new package deployment locations.
