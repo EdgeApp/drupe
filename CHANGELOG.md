@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.5
+
+- changed: Changed the scope of the package to `@edge.app` for NPM publishing.
+
 ## 0.0.4
 
 - added: Added repo, author, and license fields.

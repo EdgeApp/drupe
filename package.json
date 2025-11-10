@@ -1,6 +1,6 @@
 {
-  "name": "drupe",
-  "version": "0.0.4",
+  "name": "@edge.app/drupe",
+  "version": "0.0.5",
   "repository": "https://github.com/samholmes/drupe",
   "author": "Sam Holmes <sam.lb.holmes@gmail.com>",
   "license": "MIT",
