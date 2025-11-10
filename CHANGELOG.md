@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.6
+
+- fixed: Update installation instructions with new package deployment locations.
+
 ## 0.0.5
 
 - changed: Changed the scope of the package to `@edge.app` for NPM publishing.
