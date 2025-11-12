@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.0.8 (2025-11-12)
+
 - fixed: Include CJS in addition to ESM bundle.
 
 ## 0.0.7
