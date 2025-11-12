@@ -17,7 +17,7 @@ Install from JSR:
 
 ```bash
 # From NPM
-yarn add @edge.app/drup
+yarn add @edge.app/drupe
 
 # From JSR
 npx jsr add @edgeapp/drupe
