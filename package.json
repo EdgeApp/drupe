@@ -9,13 +9,14 @@
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
@@ -23,10 +24,11 @@
   ],
   "scripts": {
     "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});\"",
-    "build:js": "bun build ./src/index.ts --outdir ./dist --format esm",
+    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm",
+    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs && cp cjs-package.json ./dist/cjs/package.json",
     "build:types": "bunx tsc --project tsconfig.build.json",
     "build:copy-types": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/pouchdb-selector-core.d.ts','dist/pouchdb-selector-core.d.ts');\"",
-    "build": "bun run clean && bun run build:js && bun run build:types && bun run build:copy-types",
+    "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
     "prepare": "bun run build",
     "release": "bun run prepare && bunx jsr publish && npm publish"
   },

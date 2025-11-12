@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- fixed: Include CJS in addition to ESM bundle.
+
 ## 0.0.7
 
 - changed: Changed the `package.json` file to reflect Edge's ownership.
