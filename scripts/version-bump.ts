@@ -9,8 +9,10 @@ interface Version {
 
 function updateChangelog(changelogContent: string, newVersion: string): string {
   const lines = changelogContent.split("\n");
-  const unreleasedIndex = lines.findIndex((line) => line.trim() === "## Unreleased");
-  
+  const unreleasedIndex = lines.findIndex(
+    (line) => line.trim() === "## Unreleased",
+  );
+
   if (unreleasedIndex === -1) {
     throw new Error("CHANGELOG.md does not contain a '## Unreleased' section");
   }
@@ -26,29 +28,36 @@ function updateChangelog(changelogContent: string, newVersion: string): string {
 
   // Extract the Unreleased section content (excluding the header)
   let unreleasedLines = lines.slice(unreleasedIndex + 1, unreleasedEndIndex);
-  
+
   // Trim leading blank lines
   while (unreleasedLines.length > 0 && unreleasedLines[0].trim() === "") {
     unreleasedLines = unreleasedLines.slice(1);
   }
-  
+
   // Trim trailing blank lines
-  while (unreleasedLines.length > 0 && unreleasedLines[unreleasedLines.length - 1].trim() === "") {
+  while (
+    unreleasedLines.length > 0 &&
+    unreleasedLines[unreleasedLines.length - 1].trim() === ""
+  ) {
     unreleasedLines = unreleasedLines.slice(0, -1);
   }
-  
+
   // Check if there are any entries (lines starting with `-`)
-  const hasEntries = unreleasedLines.some((line) => line.trim().startsWith("-"));
-  
+  const hasEntries = unreleasedLines.some((line) =>
+    line.trim().startsWith("-"),
+  );
+
   if (!hasEntries) {
     throw new Error(
-      "CHANGELOG.md '## Unreleased' section has no entries. Please add changelog entries before bumping the version."
+      "CHANGELOG.md '## Unreleased' section has no entries. Please add changelog entries before bumping the version.",
     );
   }
 
   // Get current date in YYYY-MM-DD format
   const today = new Date();
-  const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const dateString = `${today.getFullYear()}-${String(
+    today.getMonth() + 1,
+  ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
   // Keep Unreleased at the top (empty), insert version section below it
   const newLines = [
@@ -73,14 +82,18 @@ async function main() {
 
   const currentVersion = packageJson.version;
   const current = parseVersion(currentVersion);
-  
+
   // Calculate example versions for display
   const patchExample = formatVersion(bumpVersion(current, "patch"));
   const minorExample = formatVersion(bumpVersion(current, "minor"));
   const majorExample = formatVersion(bumpVersion(current, "major"));
 
   // Prompt user for bump type using bun-promptx
-  const bumpTypes: ("patch" | "minor" | "major")[] = ["patch", "minor", "major"];
+  const bumpTypes: ("patch" | "minor" | "major")[] = [
+    "patch",
+    "minor",
+    "major",
+  ];
   const result = createSelection(
     [
       { text: `patch (${patchExample})` },
@@ -89,7 +102,7 @@ async function main() {
     ],
     {
       headerText: `Current version: ${currentVersion}`,
-    }
+    },
   );
 
   if (result.error || result.selectedIndex === null) {
@@ -107,11 +120,18 @@ async function main() {
 
   // Update CHANGELOG.md
   try {
-    const updatedChangelog = updateChangelog(changelogContent, newVersionString);
+    const updatedChangelog = updateChangelog(
+      changelogContent,
+      newVersionString,
+    );
     writeFileSync("CHANGELOG.md", updatedChangelog);
     console.log("✓ Updated CHANGELOG.md");
   } catch (error) {
-    console.error(`Error updating CHANGELOG.md: ${error instanceof Error ? error.message : String(error)}`);
+    console.error(
+      `Error updating CHANGELOG.md: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
     process.exit(1);
   }
 
@@ -133,7 +153,6 @@ main().catch((error) => {
   process.exit(1);
 });
 
-
 function parseVersion(version: string): Version {
   const parts = version.split(".").map(Number);
   return {
@@ -147,7 +166,10 @@ function formatVersion(version: Version): string {
   return `${version.major}.${version.minor}.${version.patch}`;
 }
 
-function bumpVersion(version: Version, type: "patch" | "minor" | "major"): Version {
+function bumpVersion(
+  version: Version,
+  type: "patch" | "minor" | "major",
+): Version {
   switch (type) {
     case "patch":
       return { ...version, patch: version.patch + 1 };

@@ -30,7 +30,8 @@
     "build:copy-types": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/pouchdb-selector-core.d.ts','dist/pouchdb-selector-core.d.ts');\"",
     "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
     "prepare": "bun run build",
-    "release": "bun run prepare && bunx jsr publish && npm publish"
+    "release": "bun run prepare && bunx jsr publish && npm publish",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -41,6 +42,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "pouchdb-selector-core": "^9.0.0"
+    "pouchdb-selector-core": "^9.0.0",
+    "prettier": "^3.6.2"
   }
 }
