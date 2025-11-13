@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.1.0 (2025-11-13)
+
+- added: Added cleaners for `MangoSelector` type.
+
 ## 0.0.8 (2025-11-12)
 
 - fixed: Include CJS in addition to ESM bundle.
