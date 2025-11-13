@@ -24,8 +24,8 @@
   ],
   "scripts": {
     "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});\"",
-    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm",
-    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs && cp cjs-package.json ./dist/cjs/package.json",
+    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm --packages external",
+    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs --packages external && cp cjs-package.json ./dist/cjs/package.json",
     "build:types": "bunx tsc --project tsconfig.build.json",
     "build:copy-types": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/pouchdb-selector-core.d.ts','dist/pouchdb-selector-core.d.ts');\"",
     "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
