@@ -1,9 +1,9 @@
-import { matchesSelector } from 'pouchdb-selector-core'
-import type { Drupe } from './types'
+import { matchesSelector } from "pouchdb-selector-core";
+import type { Drupe } from "./types";
 
-export const drupe: Drupe = (selector)=> (subject)=> {
-  return matchesSelector(subject, selector)
-}
+export const drupe: Drupe = (selector) => (subject) => {
+  return matchesSelector(subject, selector);
+};
 
-export type { MangoSelector } from './types'
-
+export type * from "./types";
+export * from "./cleaners";

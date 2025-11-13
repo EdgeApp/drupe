@@ -24,23 +24,27 @@
   ],
   "scripts": {
     "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});\"",
-    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm",
-    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs && cp cjs-package.json ./dist/cjs/package.json",
+    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm --packages external",
+    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs --packages external && cp cjs-package.json ./dist/cjs/package.json",
     "build:types": "bunx tsc --project tsconfig.build.json",
     "build:copy-types": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/pouchdb-selector-core.d.ts','dist/pouchdb-selector-core.d.ts');\"",
     "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
     "prepare": "bun run build",
-    "release": "bun run prepare && bunx jsr publish && npm publish"
+    "release": "bun run prepare && bunx jsr publish && npm publish",
+    "test": "bun test",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@types/bun": "latest",
     "bun-promptx": "0.2.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "prettier": "^3.6.2"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
+    "cleaners": "^0.3.17",
     "pouchdb-selector-core": "^9.0.0"
   }
 }

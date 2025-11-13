@@ -26,21 +26,26 @@ npx jsr add @edgeapp/drupe
 ## Quick start
 
 ```ts
-import { drupe } from 'drupe'
+import { drupe } from "drupe";
 
 const isPublishedTechArticle = drupe({
-  type: 'article',
+  type: "article",
   publishedAt: { $exists: true },
-  tags: { $in: ['databases', 'javascript'] }
-})
+  tags: { $in: ["databases", "javascript"] },
+});
 
 const articles = [
-  { type: 'article', slug: 'mango-101', tags: ['databases'], publishedAt: '2024-05-02' },
-  { type: 'article', slug: 'draft-post', tags: ['javascript'] },
-  { type: 'note', slug: 'retro' }
-]
+  {
+    type: "article",
+    slug: "mango-101",
+    tags: ["databases"],
+    publishedAt: "2024-05-02",
+  },
+  { type: "article", slug: "draft-post", tags: ["javascript"] },
+  { type: "note", slug: "retro" },
+];
 
-const published = articles.filter(isPublishedTechArticle)
+const published = articles.filter(isPublishedTechArticle);
 // -> [{ type: 'article', slug: 'mango-101', tags: ['databases'], publishedAt: '2024-05-02' }]
 ```
 
@@ -51,22 +56,19 @@ The same selector you use in a `db.find()` call now works as an in-memory predic
 All Mango selector operators are supported because `drupe` simply forwards to PouchDB’s selector engine. For a full reference, see the PouchDB guide on [Mango queries](https://pouchdb.com/guides/mango-queries.html) and the CouchDB documentation linked above.
 
 ```ts
-import { drupe } from 'drupe'
+import { drupe } from "drupe";
 
 const isHighValueCustomer = drupe({
-  $and: [
-    { spend: { $gte: 1000 } },
-    { status: { $in: ['gold', 'platinum'] } }
-  ]
-})
+  $and: [{ spend: { $gte: 1000 } }, { status: { $in: ["gold", "platinum"] } }],
+});
 
 const customers = [
-  { name: 'Ada', spend: 3200, status: 'platinum' },
-  { name: 'Lin', spend: 840, status: 'gold' },
-  { name: 'Edsger', spend: 1500, status: 'silver' }
-]
+  { name: "Ada", spend: 3200, status: "platinum" },
+  { name: "Lin", spend: 840, status: "gold" },
+  { name: "Edsger", spend: 1500, status: "silver" },
+];
 
-customers.filter(isHighValueCustomer)
+customers.filter(isHighValueCustomer);
 // -> [{ name: 'Ada', spend: 3200, status: 'platinum' }]
 ```
 
@@ -76,20 +78,20 @@ You can also use `$not`, `$regex`, `$size`, `$elemMatch`, and any other Mango op
 const containsLargeAttachment = drupe({
   attachments: {
     $elemMatch: {
-      content_type: { $regex: '^image/' },
-      length: { $gt: 1_000_000 }
-    }
-  }
-})
+      content_type: { $regex: "^image/" },
+      length: { $gt: 1_000_000 },
+    },
+  },
+});
 
-docs.filter(containsLargeAttachment)
+docs.filter(containsLargeAttachment);
 ```
 
 ## API
 
 ```ts
-const predicate = drupe(selector)
-predicate(document) // -> boolean
+const predicate = drupe(selector);
+predicate(document); // -> boolean
 ```
 
 - `selector` – Any valid Mango selector object.
@@ -102,11 +104,11 @@ TypeScript: The exported signature is intentionally loose—`(selector: any) => 
 `drupe` is intentionally tiny:
 
 ```ts
-import { matchesSelector } from 'pouchdb-selector-core'
+import { matchesSelector } from "pouchdb-selector-core";
 
 export const drupe = (selector: any) => (subject: unknown) => {
-  return matchesSelector(subject, selector)
-}
+  return matchesSelector(subject, selector);
+};
 ```
 
 When you call `drupe(selector)`, it defers entirely to `matchesSelector`, the same function PouchDB uses internally to evaluate Mango selectors. That means:

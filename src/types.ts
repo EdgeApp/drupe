@@ -11,12 +11,12 @@ export type MangoValue =
 export type MangoDocument = { [field: string]: MangoValue };
 
 export type MangoType =
-  | 'null'
-  | 'boolean'
-  | 'number'
-  | 'string'
-  | 'array'
-  | 'object';
+  | "null"
+  | "boolean"
+  | "number"
+  | "string"
+  | "array"
+  | "object";
 
 export interface MangoKeyMapMatch {
   [key: string]: MangoSelector | undefined;
@@ -62,4 +62,3 @@ export interface MangoSelector {
   $nor?: MangoSelector[];
   $not?: MangoSelector;
 }
-
