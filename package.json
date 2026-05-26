@@ -9,14 +9,19 @@
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "files": [
@@ -24,21 +29,25 @@
   ],
   "scripts": {
     "clean": "node -e \"const fs=require('fs');fs.rmSync('dist',{recursive:true,force:true});\"",
-    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm --packages external",
-    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs --packages external && cp cjs-package.json ./dist/cjs/package.json",
-    "build:types": "bunx tsc --project tsconfig.build.json",
-    "build:copy-types": "node -e \"const fs=require('fs');fs.mkdirSync('dist',{recursive:true});fs.copyFileSync('src/pouchdb-selector-core.d.ts','dist/pouchdb-selector-core.d.ts');\"",
-    "build": "bun run clean && bun run build:esm && bun run build:cjs && bun run build:types && bun run build:copy-types",
-    "prepare": "bun run build",
-    "release": "bun run prepare && bunx jsr publish && npm publish",
-    "test": "bun test",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build",
+    "release": "npm run prepare && npx jsr publish && npm publish",
+    "test": "vitest run",
+    "version-bump": "tsx scripts/version-bump.ts",
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "bun-promptx": "0.2.0",
+    "@inquirer/select": "^3.0.0",
+    "@types/node": "^20.0.0",
+    "prettier": "^3.6.2",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
     "typescript": "^5.6.3",
-    "prettier": "^3.6.2"
+    "vitest": "^4.0.0"
+  },
+  "overrides": {
+    "uuid": "^11.0.0"
   },
   "peerDependencies": {
     "typescript": "^5"

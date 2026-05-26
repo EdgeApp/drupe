@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "fs";
-import { createSelection } from "bun-promptx";
+import select from "@inquirer/select";
 
 interface Version {
   major: number;
@@ -88,29 +88,14 @@ async function main() {
   const minorExample = formatVersion(bumpVersion(current, "minor"));
   const majorExample = formatVersion(bumpVersion(current, "major"));
 
-  // Prompt user for bump type using bun-promptx
-  const bumpTypes: ("patch" | "minor" | "major")[] = [
-    "patch",
-    "minor",
-    "major",
-  ];
-  const result = createSelection(
-    [
-      { text: `patch (${patchExample})` },
-      { text: `minor (${minorExample})` },
-      { text: `major (${majorExample})` },
+  const bumpType = await select<"patch" | "minor" | "major">({
+    message: `Current version: ${currentVersion}`,
+    choices: [
+      { name: `patch (${patchExample})`, value: "patch" },
+      { name: `minor (${minorExample})`, value: "minor" },
+      { name: `major (${majorExample})`, value: "major" },
     ],
-    {
-      headerText: `Current version: ${currentVersion}`,
-    },
-  );
-
-  if (result.error || result.selectedIndex === null) {
-    console.error(result.error || "No selection made. Exiting.");
-    process.exit(1);
-  }
-
-  const bumpType = bumpTypes[result.selectedIndex];
+  });
 
   // Calculate new version
   const newVersion = bumpVersion(current, bumpType);

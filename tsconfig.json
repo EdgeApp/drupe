@@ -26,5 +26,5 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["src"]
+  "include": ["src", "tests", "scripts", "tsup.config.ts"]
 }
