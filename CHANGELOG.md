@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.0 (2026-06-12)
+
 - changed: Convert the build tooling from Bun to npm.
 - security: Upgrade dependencies per Socket security recommendations.
 
