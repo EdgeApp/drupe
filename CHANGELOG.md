@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- changed: Convert the build tooling from Bun to npm.
+- security: Upgrade dependencies per Socket security recommendations.
+
 ## 0.1.0 (2025-11-13)
 
 - added: Added cleaners for `MangoSelector` type.
