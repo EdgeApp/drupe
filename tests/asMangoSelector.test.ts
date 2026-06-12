@@ -545,7 +545,7 @@ describe("asMangoSelector", () => {
         });
         expect(true).toBe(false);
       } catch (error: any) {
-        expect(error.message).toBe("Expected a Mango selector object");
+        expect(error.message).toBe("Expected a Mango selector object at .$not");
       }
     });
 
@@ -590,7 +590,9 @@ describe("asMangoSelector", () => {
         });
         expect(true).toBe(false);
       } catch (error: any) {
-        expect(error.message).toBe('Expected an array, got "not an array"');
+        expect(error.message).toBe(
+          'Expected an array, got "not an array" at .$and'
+        );
       }
     });
 
@@ -601,7 +603,9 @@ describe("asMangoSelector", () => {
         });
         expect(true).toBe(false);
       } catch (error: any) {
-        expect(error.message).toBe('Expected an array, got "not an array"');
+        expect(error.message).toBe(
+          'Expected an array, got "not an array" at .$or'
+        );
       }
     });
 
@@ -612,7 +616,9 @@ describe("asMangoSelector", () => {
         });
         expect(true).toBe(false);
       } catch (error: any) {
-        expect(error.message).toBe('Expected an array, got "not an array"');
+        expect(error.message).toBe(
+          'Expected an array, got "not an array" at .$nor'
+        );
       }
     });
 
